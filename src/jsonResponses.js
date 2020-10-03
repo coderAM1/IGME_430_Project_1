@@ -1,5 +1,4 @@
 // Note this object is purely in memory
-const users = {};
 const aetherParties = {};
 const primalParties = {};
 const crystalParties = {};
@@ -55,16 +54,12 @@ const addParty = (request, response, body) => {
 
   if (!body.name || !body.server || !body.content || !body.minItemLevel) {
     responseJSON.id = 'missingParams';
-    console.log(body.name);
-    console.log(body.server);
-    console.log(body.content);
-    console.log(body.minItemLevel);
-    
+
     return respondJSON(request, response, 400, responseJSON); // 400=bad request
   }
   // we DID get a name and age
   let responseCode = 201;
-  if(body.server === '/aether'){
+  if (body.server === '/aether') {
     if (aetherParties[body.name]) {
       responseCode = 204;
     } else {
@@ -74,7 +69,7 @@ const addParty = (request, response, body) => {
     aetherParties[body.name].name = body.name;
     aetherParties[body.name].content = body.content;
     aetherParties[body.name].minItemLevel = body.minItemLevel;
-  }else if(body.server === '/primal'){
+  } else if (body.server === '/primal') {
     if (primalParties[body.name]) {
       responseCode = 204;
     } else {
@@ -84,7 +79,7 @@ const addParty = (request, response, body) => {
     primalParties[body.name].name = body.name;
     primalParties[body.name].content = body.content;
     primalParties[body.name].minItemLevel = body.minItemLevel;
-  }else{
+  } else {
     if (crystalParties[body.name]) {
       responseCode = 204;
     } else {

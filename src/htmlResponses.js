@@ -18,8 +18,7 @@ const getCSS = (request, response) => {
   getResponse(request, response, 'text/css', styleSheet);
 };
 
-const getJs = (request,response) => {
-  console.log("does this happen");
+const getJs = (request, response) => {
   getResponse(request, response, 'text/javascript', scriptSheet);
 };
 

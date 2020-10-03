@@ -25,7 +25,7 @@ const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
     '/style.css': htmlHandler.getCSS,
-    '/index.js' : htmlHandler.getJs,
+    '/index.js': htmlHandler.getJs,
     '/aether': jsonHandler.getAether,
     '/primal': jsonHandler.getPrimal,
     '/crystal': jsonHandler.getCrystal,
