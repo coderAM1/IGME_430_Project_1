@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Project 1 Prototype</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+  <script src="/index.js"></script>
+</head>
+<body>
+  <section id="top">
+    <h3>FFXIV party tool</h3>
+    <!--<form id="characterForm">
+      <label for="name">Username: </label>
+      <input id="nameField" type="text" name="name" />
+      <label for="itemLevel">ItemLevel: </label>
+      <input id="itemLevelField" type="number" name="itemLevel" min="450" max="500" step="1"/>
+      <select id="role">
+        <option value='/tank'>Tank</option>
+        <option value='/healer'>Healer</option>
+        <option value='/melee'>Melee DPS</option>
+        <option value='/ranged'>Ranged DPS</option>
+        <option value='/caster'>Caster DPS</option>
+      </select>
+      <select id="dataCenter">
+        <option value="/aether">Aether</option>
+        <option value="/primal">Primal</option>
+        <option value="/crystal">Crystal</option>
+      </select>
+    </form>-->
+    <form id="postParty" action="/addParty" method="post">
+      <label for="name">Username: </label>
+      <input id="nameField" type="text" name="name" />
+      <select id="dataCenter">
+        <option value="/aether">Aether</option>
+        <option value="/primal">Primal</option>
+        <option value="/crystal">Crystal</option>
+      </select>
+      <select id="highEndContent">
+        <option value="/e1s">Eden's Gate: Resurrection(Savage)</option>
+        <option value="/e2s">Eden's Gate: Descent(Savage)</option>
+        <option value="/e3s">Eden's Gate: Inundation(Savage)</option>
+        <option value="/e4s">Eden's Gate: Sepulture(Savage)</option>
+        <option value="/e5s">Eden's Verse: Fulmination(Savage)</option>
+        <option value="/e6s">Eden's Verse: Furor(Savage)</option>
+        <option value="/e7s">Eden's Verse: Iconoclasm(Savage)</option>
+        <option value="/e8s">Eden's Verse: Refulgence(Savage)</option>
+        <option value="/tea">The Epic of Alexander (Ultimate)</option>
+      </select>
+      <label for="minItemLevel">MinItemLevel: </label>
+      <input id="itemLevelField" type="number" name="minItemLevel" min="450" max="500" step="1"/>
+      <input type="submit" value="Add Party" />
+    </form>
+    <form id="getParties" action="/getParties" method="get">
+      <select id="dataCenter">
+        <option value="/aether">Aether</option>
+        <option value="/primal">Primal</option>
+        <option value="/crystal">Crystal</option>
+      </select>
+      <input type="submit" value="Get Parties" />
+    </form>
+  </section>
+  <section id="content">
+  </section>
+</body>
+</html>
