@@ -52,7 +52,7 @@ const addParty = (request, response, body) => {
     message: 'Need to fill out username and minItemLevel',
   };
 
-  if (!body.name || !body.server || !body.content || !body.minItemLevel) {
+  if (!body.name || !body.server || !body.content || !body.minItemLevel || !body.date || !body.time) {
     responseJSON.id = 'missingParams';
 
     return respondJSON(request, response, 400, responseJSON); // 400=bad request
@@ -69,6 +69,8 @@ const addParty = (request, response, body) => {
     aetherParties[body.name].name = body.name;
     aetherParties[body.name].content = body.content;
     aetherParties[body.name].minItemLevel = body.minItemLevel;
+    aetherParties[body.name].date = body.date;
+    aetherParties[body.name].time = body.time;
   } else if (body.server === '/primal') {
     if (primalParties[body.name]) {
       responseCode = 204;
@@ -79,6 +81,8 @@ const addParty = (request, response, body) => {
     primalParties[body.name].name = body.name;
     primalParties[body.name].content = body.content;
     primalParties[body.name].minItemLevel = body.minItemLevel;
+    primalParties[body.name].raidDate = body.date;
+    primalParties[body.name].raidTime = body.time;
   } else {
     if (crystalParties[body.name]) {
       responseCode = 204;
@@ -89,6 +93,8 @@ const addParty = (request, response, body) => {
     crystalParties[body.name].name = body.name;
     crystalParties[body.name].content = body.content;
     crystalParties[body.name].minItemLevel = body.minItemLevel;
+    crystalParties[body.name].raidDate = body.date;
+    crystalParties[body.name].raidTime = body.time;
   }
 
   if (responseCode === 201) {

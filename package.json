@@ -23,6 +23,7 @@
     "eslint": "^7.9.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
+    "js-datepicker": "^5.16.0",
     "nodemon": "^2.0.4"
   }
 }

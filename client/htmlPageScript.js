@@ -53,12 +53,14 @@ const handleResponse = (xhr, parseResponse) => {
     const dataCenterField = nameForm.querySelector("#dataCenter");
     const highEndContentField = nameForm.querySelector("#highEndContent");
     const minItemLevelField = nameForm.querySelector("#itemLevelField");
+    const DateField = nameForm.querySelector("#raidDate");
+    const timeField = nameForm.querySelector("#raidTime");
     const xhr = new XMLHttpRequest();
     xhr.open(nameMethod,nameAction);
     xhr.setRequestHeader('Accept','application/json');
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
     xhr.onload = () => handleResponse(xhr,true);
-    const formData = `name=${nameField.value}&server=${dataCenterField.value}&content=${highEndContentField.value}&minItemLevel=${minItemLevelField.value}`;
+    const formData = `name=${nameField.value}&server=${dataCenterField.value}&content=${highEndContentField.value}&minItemLevel=${minItemLevelField.value}&date=${DateField.value}&time=${timeField.value}`;
     xhr.send(formData);
     return false;
   };

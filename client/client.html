@@ -28,7 +28,7 @@
       </select>
     </form>-->
     <form id="postParty" action="/addParty" method="post">
-      <label for="name">Username: </label>
+      <label for="nameField">Username: </label>
       <input id="nameField" type="text" name="name" />
       <select id="dataCenter">
         <option value="/aether">Aether</option>
@@ -46,7 +46,10 @@
         <option value="/e8s">Eden's Verse: Refulgence(Savage)</option>
         <option value="/tea">The Epic of Alexander (Ultimate)</option>
       </select>
-      <label for="minItemLevel">MinItemLevel: </label>
+      <label for="raidDate">Date For Raid: </label>
+      <input id="raidDate" type="date" value="2020-11-11">
+      <label for="raidTime">Raid Time: </label>
+      <input id="raidTime" type="time" name="raidTime" value="12:00"/>
       <input id="itemLevelField" type="number" name="minItemLevel" min="450" max="500" step="1"/>
       <input type="submit" value="Add Party" />
     </form>
