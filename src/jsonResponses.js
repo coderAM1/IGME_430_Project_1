@@ -1,8 +1,39 @@
 // Note this object is purely in memory
-const aetherParties = {};
-const primalParties = {};
-const crystalParties = {};
-
+const url = require('url');
+const Aether = {
+  "Thorin Battlehammer":{"content":"Eden's Gate: Resurrection(Savage)","minItemLevel":"450","date":"2020-11-12","time":"12:00"},
+  "Thorin BattleStorm":{"content":"Eden's Gate: Descent(Savage)","minItemLevel":"450","date":"2020-11-13","time":"12:00"},
+  "Thorin Battlehammer2":{"content":"Eden's Gate: Inundation(Savage)","minItemLevel":"450","date":"2020-11-14","time":"12:00"},
+  "Thorin BattleStorm2":{"content":"Eden's Gate: Sepulture(Savage)","minItemLevel":"450","date":"2020-11-15","time":"12:00"},
+  "Thorin Battlehammer3":{"content":"Eden's Verse: Fulmination(Savage)","minItemLevel":"470","date":"2020-11-16","time":"12:00"},
+  "Thorin BattleStorm3":{"content":"Eden's Verse: Furor(Savage)","minItemLevel":"470","date":"2020-11-17","time":"12:00"},
+  "Thorin Battlehammer4":{"content":"Eden's Verse: Iconoclasm(Savage)","minItemLevel":"470","date":"2020-11-18","time":"12:00"},
+  "Thorin BattleStorm4":{"content":"Eden's Verse: Refulgence(Savage)","minItemLevel":"470","date":"2020-11-19","time":"12:00"},
+  "Thorin Battlehammer5":{"content":"The Epic of Alexander (Ultimate)","minItemLevel":"470","date":"2020-11-20","time":"12:00"},
+};
+const Primal = {
+  "Thorin Battlehammer":{"content":"Eden's Gate: Resurrection(Savage)","minItemLevel":"450","date":"2020-11-12","time":"12:00"},
+  "Thorin BattleStorm":{"content":"Eden's Gate: Descent(Savage)","minItemLevel":"450","date":"2020-11-13","time":"12:00"},
+  "Thorin Battlehammer2":{"content":"Eden's Gate: Inundation(Savage)","minItemLevel":"450","date":"2020-11-14","time":"12:00"},
+  "Thorin BattleStorm2":{"content":"Eden's Gate: Sepulture(Savage)","minItemLevel":"450","date":"2020-11-15","time":"12:00"},
+  "Thorin Battlehammer3":{"content":"Eden's Verse: Fulmination(Savage)","minItemLevel":"470","date":"2020-11-16","time":"12:00"},
+  "Thorin BattleStorm3":{"content":"Eden's Verse: Furor(Savage)","minItemLevel":"470","date":"2020-11-17","time":"12:00"},
+  "Thorin Battlehammer4":{"content":"Eden's Verse: Iconoclasm(Savage)","minItemLevel":"470","date":"2020-11-18","time":"12:00"},
+  "Thorin BattleStorm4":{"content":"Eden's Verse: Refulgence(Savage)","minItemLevel":"470","date":"2020-11-19","time":"12:00"},
+  "Thorin Battlehammer5":{"content":"The Epic of Alexander (Ultimate)","minItemLevel":"470","date":"2020-11-20","time":"12:00"},
+};
+const Crystal = {
+  "Thorin Battlehammer":{"content":"Eden's Gate: Resurrection(Savage)","minItemLevel":"450","date":"2020-11-12","time":"12:00"},
+  "Thorin BattleStorm":{"content":"Eden's Gate: Descent(Savage)","minItemLevel":"450","date":"2020-11-13","time":"12:00"},
+  "Thorin Battlehammer2":{"content":"Eden's Gate: Inundation(Savage)","minItemLevel":"450","date":"2020-11-14","time":"12:00"},
+  "Thorin BattleStorm2":{"content":"Eden's Gate: Sepulture(Savage)","minItemLevel":"450","date":"2020-11-15","time":"12:00"},
+  "Thorin Battlehammer3":{"content":"Eden's Verse: Fulmination(Savage)","minItemLevel":"470","date":"2020-11-16","time":"12:00"},
+  "Thorin BattleStorm3":{"content":"Eden's Verse: Furor(Savage)","minItemLevel":"470","date":"2020-11-17","time":"12:00"},
+  "Thorin Battlehammer4":{"content":"Eden's Verse: Iconoclasm(Savage)","minItemLevel":"470","date":"2020-11-18","time":"12:00"},
+  "Thorin BattleStorm4":{"content":"Eden's Verse: Refulgence(Savage)","minItemLevel":"470","date":"2020-11-19","time":"12:00"},
+  "Thorin Battlehammer5":{"content":"The Epic of Alexander (Ultimate)","minItemLevel":"470","date":"2020-11-20","time":"12:00"},
+};
+//responds with a json
 const respondJSON = (request, response, status, object) => {
   const headers = {
     'Content-Type': 'application/json',
@@ -12,7 +43,7 @@ const respondJSON = (request, response, status, object) => {
   response.write(JSON.stringify(object));
   response.end();
 };
-
+//meta response
 const respondJSONMeta = (request, response, status) => {
   const headers = {
     'Content-Type': 'application/json',
@@ -20,81 +51,82 @@ const respondJSONMeta = (request, response, status) => {
   response.writeHead(status, headers);
   response.end();
 };
-
+//gets the aether datacenter parties
 const getAether = (request, response) => {
-  const responseJSON = {
-    aetherParties,
-  };
+  let jsonToAdd = {};
+  const parsedUrl = url.parse(request.url);
+  if(!parsedUrl.query){
+    jsonToAdd = Aether;
+  }
+  else{
+    const stringToFind = contentPicker("/"+parsedUrl.query.substring(8,11));
+    for(const key of Object.keys(Aether)){
+      if(Aether[key].content == stringToFind){
+        jsonToAdd[key] = Aether[key];
+      }
 
+    }
+  }
+  const responseJSON = jsonToAdd;
   return respondJSON(request, response, 200, responseJSON);
 };
-
+//gets the primal datacenter parties
 const getPrimal = (request, response) => {
-  const responseJSON = {
-    primalParties,
-  };
+  let jsonToAdd = {};
+  const parsedUrl = url.parse(request.url);
+  if(!parsedUrl.query){
+    jsonToAdd = Primal;
+  }
+  else{
+    const stringToFind = contentPicker("/"+parsedUrl.query.substring(8,11));
+    for(const key of Object.keys(Primal)){
+      if(Aether[key].content == stringToFind){
+        jsonToAdd[key] = Primal[key];
+      }
 
+    }
+  }
+  const responseJSON = jsonToAdd;
   return respondJSON(request, response, 200, responseJSON);
 };
-
+//gets the crystal datacenter parties
 const getCrystal = (request, response) => {
-  const responseJSON = {
-    crystalParties,
-  };
-
+  let jsonToAdd = {};
+  const parsedUrl = url.parse(request.url);
+  if(!parsedUrl.query){
+    jsonToAdd = Crystal;
+  }
+  else{
+    const stringToFind = contentPicker("/"+parsedUrl.query.substring(8,11));
+    for(const key of Object.keys(Crystal)){
+      if(Aether[key].content == stringToFind){
+        jsonToAdd[key] = Crystal[key];
+      }
+    }
+  }
+  const responseJSON = jsonToAdd;
   return respondJSON(request, response, 200, responseJSON);
 };
 
 const getUsersMeta = (request, response) => respondJSONMeta(request, response, 200);
-
-const addParty = (request, response, body) => {
+//adds a party to the correct datacenter
+const addParty = (request, response, b) => {
   const responseJSON = {
     message: 'Need to fill out username and minItemLevel',
   };
 
-  if (!body.name || !body.server || !body.content || !body.minItemLevel || !body.date || !body.time) {
+  if (!b.name || !b.server || !b.content || !b.minItemLevel || !b.date || !b.time) {
     responseJSON.id = 'missingParams';
 
     return respondJSON(request, response, 400, responseJSON); // 400=bad request
   }
-  // we DID get a name and age
   let responseCode = 201;
-  if (body.server === '/aether') {
-    if (aetherParties[body.name]) {
-      responseCode = 204;
-    } else {
-      aetherParties[body.name] = {};
-    }
-    // update or initialize values, as the case may be
-    aetherParties[body.name].name = body.name;
-    aetherParties[body.name].content = body.content;
-    aetherParties[body.name].minItemLevel = body.minItemLevel;
-    aetherParties[body.name].date = body.date;
-    aetherParties[body.name].time = body.time;
-  } else if (body.server === '/primal') {
-    if (primalParties[body.name]) {
-      responseCode = 204;
-    } else {
-      primalParties[body.name] = {};
-    }
-    // update or initialize values, as the case may be
-    primalParties[body.name].name = body.name;
-    primalParties[body.name].content = body.content;
-    primalParties[body.name].minItemLevel = body.minItemLevel;
-    primalParties[body.name].raidDate = body.date;
-    primalParties[body.name].raidTime = body.time;
+  if (b.server === '/aether') {
+    responseCode = addToParties(Aether,b,responseCode);
+  } else if (b.server === '/primal') {
+    responseCode = addToParties(Primal,b,responseCode);
   } else {
-    if (crystalParties[body.name]) {
-      responseCode = 204;
-    } else {
-      crystalParties[body.name] = {};
-    }
-    // update or initialize values, as the case may be
-    crystalParties[body.name].name = body.name;
-    crystalParties[body.name].content = body.content;
-    crystalParties[body.name].minItemLevel = body.minItemLevel;
-    crystalParties[body.name].raidDate = body.date;
-    crystalParties[body.name].raidTime = body.time;
+    responseCode = addToParties(Crystal,b,responseCode);
   }
 
   if (responseCode === 201) {
@@ -104,7 +136,61 @@ const addParty = (request, response, body) => {
 
   return respondJSONMeta(request, response, responseCode);
 };
-
+//DRY method for adding to the correct object
+const addToParties = (serverPartsie, b, responseCode) => {
+  if (serverPartsie[b.name]) {
+    responseCode = 204;
+  } else {
+    serverPartsie[b.name] = {};
+  }
+  // update or initialize values, as the case may be
+  //serverPartsie[b.name].name = b.name;
+  
+  serverPartsie[b.name].content = contentPicker(b.content.substring(0,4));
+  serverPartsie[b.name].minItemLevel = b.minItemLevel;
+  serverPartsie[b.name].date = b.date;
+  serverPartsie[b.name].time = b.time;
+  return responseCode;
+};
+//used to get the proper string for the content
+const contentPicker = (content) =>{
+  let stringToReturn;
+  switch(content){
+    case "/e1s":
+      stringToReturn = "Eden's Gate: Resurrection(Savage)";
+      break;
+    case "/e2s":
+      stringToReturn = "Eden's Gate: Descent(Savage)";
+      break;
+    case "/e3s":
+      stringToReturn = "Eden's Gate: Inundation(Savage)";
+      break;
+    case "/e4s":
+      stringToReturn = "Eden's Gate: Sepulture(Savage)";
+      break;
+    case "/e5s":
+      stringToReturn = "Eden's Verse: Fulmination(Savage)";
+      break;
+    case "/e6s":
+      stringToReturn = "Eden's Verse: Furor(Savage)";
+      break;
+    case "/e7s":
+      stringToReturn = "Eden's Verse: Iconoclasm(Savage)";
+      break;
+    case "/e8s":
+      stringToReturn = "Eden's Verse: Refulgence(Savage)";
+      break;
+    case "/tea":
+      stringToReturn = "The Epic of Alexander (Ultimate)";
+      break;
+    default:
+      console.log(content);
+      stringToReturn = content;
+      break;
+  }
+  return stringToReturn;
+};
+//404 method
 const notFound = (request, response) => {
   const responseJSON = {
     message: 'The page you are looking for was not found!',
@@ -112,6 +198,8 @@ const notFound = (request, response) => {
   };
   return respondJSON(request, response, 404, responseJSON);
 };
+
+
 
 const notFoundMeta = (request, response) => respondJSONMeta(request, response, 404);
 

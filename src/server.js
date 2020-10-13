@@ -20,7 +20,7 @@ const handlePost = (request, response) => {
     jsonHandler.addParty(request, response, bodyParams);
   });
 };
-
+//urlStruct to make it easier to add to
 const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
@@ -41,7 +41,7 @@ const urlStruct = {
 
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
-
+  console.log(parsedUrl);
   if (urlStruct[request.method][parsedUrl.pathname]) {
     urlStruct[request.method][parsedUrl.pathname](request, response);
   } else {
