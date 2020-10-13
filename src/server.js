@@ -20,7 +20,7 @@ const handlePost = (request, response) => {
     jsonHandler.addParty(request, response, bodyParams);
   });
 };
-//urlStruct to make it easier to add to
+// urlStruct to make it easier to add to
 const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
